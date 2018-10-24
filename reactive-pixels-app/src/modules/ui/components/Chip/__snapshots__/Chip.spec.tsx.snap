@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Chip /> should render <Chip /> component 1`] = `
+<div
+  class="css-8ho039"
+>
+  <span />
+</div>
+`;

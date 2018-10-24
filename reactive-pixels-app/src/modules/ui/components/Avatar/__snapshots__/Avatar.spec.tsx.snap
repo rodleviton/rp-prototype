@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Avatar /> should render <Avatar /> component 1`] = `
+<div
+  class="css-4s191h css-otakqs"
+>
+  <img
+    class="css-1vm9b5l css-q7lffx"
+  />
+</div>
+`;

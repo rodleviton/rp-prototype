@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Grid /> should render <Grid /> component 1`] = `
+<div
+  class="css-0 sc-bwzfXH hKiLMS sc-bdVaJa bDWFJH"
+/>
+`;

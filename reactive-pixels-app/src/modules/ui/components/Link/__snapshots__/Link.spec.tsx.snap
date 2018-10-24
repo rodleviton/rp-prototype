@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Link /> should render <Link /> component 1`] = `
+<a
+  class="css-0"
+  href="/"
+/>
+`;

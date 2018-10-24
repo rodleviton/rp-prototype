@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Button /> sizes should render a \`small\` <Button /> component 1`] = `
+<button
+  class="css-pmc161 css-2f61t6 css-1dhsa7o css-9fbhz8"
+  data-testid="button-under-test"
+>
+  I am a 
+  small
+   
+  default
+   button
+</button>
+`;
+
+exports[`<Button /> sizes should render a \`small\` <Button /> component 2`] = `
+<button
+  class="css-pmc161 css-2f61t6 css-1dhsa7o css-9fbhz8"
+  data-testid="button-under-test"
+>
+  I am a 
+  large
+   
+  default
+   button
+</button>
+`;
+
+exports[`<Button /> variants should render a \`primary\` <Button /> component 1`] = `
+<button
+  class="css-pmc161 css-2f61t6 css-13qzre css-zm3qx2"
+  data-testid="button-under-test"
+>
+  I am a 
+  small
+   
+  primary
+   button
+</button>
+`;
+
+exports[`<Button /> variants should render a \`secondary\` <Button /> component 1`] = `
+<button
+  class="css-pmc161 css-2f61t6 css-h1txb1 css-5cm1aq"
+  data-testid="button-under-test"
+>
+  I am a 
+  small
+   
+  secondary
+   button
+</button>
+`;
+
+exports[`<Button /> variants should render a default <Button /> component 1`] = `
+<button
+  class="css-pmc161 css-2f61t6 css-1dhsa7o css-9fbhz8"
+  data-testid="button-under-test"
+>
+  I am a 
+  small
+   
+  default
+   button
+</button>
+`;

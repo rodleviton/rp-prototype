@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AuthorCard /> should render <AuthorCard /> component 1`] = `
+<a
+  class="css-0 css-1rmnx1q"
+  href="/"
+>
+  <div
+    class="css-4s191h css-otakqs"
+  >
+    <img
+      class="css-1vm9b5l css-q7lffx"
+      src="images/avatar.png"
+    />
+  </div>
+  <div
+    class="css-0 css-1y6ic72 sc-bdVaJa bDWFJH"
+  >
+    <div
+      class="css-0 css-brw9d9 sc-bdVaJa bDWFJH"
+    >
+      Created By
+    </div>
+    <div
+      class="css-0 css-7204n3 sc-bdVaJa bDWFJH"
+    >
+      Rod Leviton
+    </div>
+  </div>
+</a>
+`;

@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TagCollection /> should render <TagCollection /> component 1`] = `
+<div
+  class="css-0 css-0 sc-bwzfXH hKiLMS sc-bdVaJa huuLvL"
+>
+  <div
+    class="css-0 sc-bdVaJa jGsEf"
+  >
+    <div
+      class="css-8ho039"
+    >
+      <span>
+        motion
+      </span>
+    </div>
+  </div>
+  <div
+    class="css-0 sc-bdVaJa jGsEf"
+  >
+    <div
+      class="css-8ho039"
+    >
+      <span>
+        webgl
+      </span>
+    </div>
+  </div>
+  <div
+    class="css-0 sc-bdVaJa jGsEf"
+  >
+    <div
+      class="css-8ho039"
+    >
+      <span>
+        canvas
+      </span>
+    </div>
+  </div>
+</div>
+`;

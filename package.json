@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "workspaces": [
+    "reactive-pixels-app",
+    "reactive-pixels-api",
+    "reactive-pixels-common"
+  ]
+}

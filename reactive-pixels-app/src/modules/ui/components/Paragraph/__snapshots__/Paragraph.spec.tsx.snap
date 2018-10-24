@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Paragraph /> should render the default <Paragraph /> component 1`] = `
+<p
+  class="css-9053gv css-f2pcb3"
+>
+  Lorem ipsum.
+</p>
+`;
+
+exports[`<Paragraph /> variants should render the \`body1\` variant paragraph 1`] = `
+<p
+  class="css-9053gv css-f2pcb3"
+>
+  Lorem ipsum.
+</p>
+`;
+
+exports[`<Paragraph /> variants should render the \`body2\` variant paragraph 1`] = `
+<p
+  class="css-q8wvcp css-f2pcb3"
+>
+  Lorem ipsum.
+</p>
+`;
+
+exports[`<Paragraph /> variants should render the \`dark\` colour paragraph 1`] = `
+<p
+  class="css-9053gv css-f2pcb3"
+>
+  Lorem ipsum.
+</p>
+`;
+
+exports[`<Paragraph /> variants should render the \`light\` colour paragraph 1`] = `
+<p
+  class="css-9053gv css-zm3qx2"
+>
+  Lorem ipsum.
+</p>
+`;
+
+exports[`<Paragraph /> variants should render the \`subheading\` variant paragraph 1`] = `
+<p
+  class="css-1fqj1fm css-f2pcb3"
+>
+  Lorem ipsum.
+</p>
+`;

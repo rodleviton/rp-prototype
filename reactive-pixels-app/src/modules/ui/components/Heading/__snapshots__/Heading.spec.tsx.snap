@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Heading /> should render <Heading /> component 1`] = `
+<h1
+  class="css-16de30t css-1u1rfwc css-pelz90"
+>
+  Lorem ipsum
+</h1>
+`;

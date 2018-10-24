@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Logo /> should render <Logo /> component 1`] = `
+<div
+  class="css-i6bazn css-1y7im4q"
+>
+  <img
+    class="css-0 css-bq6z5n"
+    src="logo.svg"
+  />
+</div>
+`;
