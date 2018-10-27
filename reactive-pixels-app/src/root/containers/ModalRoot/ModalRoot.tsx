@@ -1,7 +1,7 @@
 import { hideNotification } from "@modules/notifications/daos/notificationActions";
 import { INotificationsState } from "@modules/notifications/daos/notificationReducer";
-import { AuthPrompt } from "@modules/ui/structures/AuthPrompt";
-import { IBaseTheme, withStyles } from "@modules/ui/theme";
+import { IBaseTheme, withStyles } from "@modules/reactive-pixels-ui/theme";
+import { AuthPrompt } from "@root/components/AuthPrompt";
 import { IRootState } from "@root/daos/rootReducer";
 import classnames from "classnames";
 import { css } from "emotion";
@@ -25,7 +25,7 @@ interface IProps {
 }
 
 const notificationTypes = {
-  Auth: AuthPrompt
+  NOT_AUTHORISED: AuthPrompt
 };
 
 const styles = (theme: IBaseTheme): IClasses => {
@@ -108,7 +108,8 @@ export class ModalRoot extends React.PureComponent<IProps> {
     } = this.props;
 
     const SpecificNotification =
-      notificationTypes[notification.modalType] || notificationTypes.Auth;
+      notificationTypes[notification.modalType] ||
+      notificationTypes.NOT_AUTHORISED;
 
     return (
       <ReactModal

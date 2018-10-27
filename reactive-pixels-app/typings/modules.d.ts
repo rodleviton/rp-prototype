@@ -1,4 +1,3 @@
-declare module "rebass";
 declare module "emotion";
 declare module "react-emotion";
 declare module "react-testing-library";

@@ -5,7 +5,7 @@ import { createHttpLink } from "apollo-link-http";
 import store from "./rootStore";
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:5000/graphql"
+  uri: process.env.REACTIVE_PIXELS_GRAPHQL_BASE_URL
 });
 
 const authLink = setContext((_, { headers }) => {

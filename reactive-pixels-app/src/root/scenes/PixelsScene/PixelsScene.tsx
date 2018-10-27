@@ -1,4 +1,4 @@
-import { Slider } from "@modules/ui/structures/Slider";
+import { Slider } from "@modules/reactive-pixels-ui/structures/Slider";
 import {
   buildPixelsCommentsRoute,
   buildPixelsMetaRoute,
@@ -6,9 +6,9 @@ import {
 } from "@root/helpers/routeBuilder";
 import { History } from "history";
 import * as React from "react";
-import { CommentsSlider } from "./components/CommentsSlider";
-import { HeroSlider } from "./components/HeroSlider";
-import { MetaSlider } from "./components/MetaSlider";
+import { PixelsCommentsSlider } from "./components/PixelsCommentsSlider";
+import { PixelsHeroSlider } from "./components/PixelsHeroSlider";
+import { PixelsMetadataSlider } from "./components/PixelsMetadataSlider";
 
 type IPanelTypes = "comments" | "meta";
 
@@ -45,6 +45,7 @@ class PixelsScene extends React.PureComponent<IProps> {
     const pixelsRoute = buildPixelsRoute(id, username);
     const commentsRoute = buildPixelsCommentsRoute(id, username);
 
+    // TODO - Abstract route handling
     this.isCommentsPanelActive()
       ? history.push(pixelsRoute)
       : history.push(commentsRoute);
@@ -56,6 +57,7 @@ class PixelsScene extends React.PureComponent<IProps> {
     const pixelsRoute = buildPixelsRoute(id, username);
     const sourceRoute = buildPixelsMetaRoute(id, username);
 
+    // TODO - Abstract route handling
     this.isMetaPanelActive()
       ? history.push(pixelsRoute)
       : history.push(sourceRoute);
@@ -67,17 +69,17 @@ class PixelsScene extends React.PureComponent<IProps> {
 
     return (
       <Slider>
-        <CommentsSlider
+        <PixelsCommentsSlider
           active={isCommentsPanelActive}
           onToggle={this.onCommentsButtonToggle}
         />
 
-        <HeroSlider
+        <PixelsHeroSlider
           isCommentsPanelActive={isCommentsPanelActive}
           isMetaPanelActive={isMetaPanelActive}
         />
 
-        <MetaSlider
+        <PixelsMetadataSlider
           active={isMetaPanelActive}
           onToggle={this.onMetaButtonToggle}
         />

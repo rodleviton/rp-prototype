@@ -1,5 +1,5 @@
-import { Header } from "@modules/ui/structures/Header";
-import { createTheme, ThemeProvider } from "@modules/ui/theme";
+import { Header } from "@modules/reactive-pixels-ui/structures/Header";
+import { createTheme, ThemeProvider } from "@modules/reactive-pixels-ui/theme";
 import { ModalRoot } from "@root/containers/ModalRoot";
 import { UserAuthWidget } from "@root/containers/UserAuthWidget";
 import client from "@root/daos/client";

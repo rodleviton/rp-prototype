@@ -5,7 +5,7 @@ import { ActionType, getType } from "typesafe-actions";
 
 export type AuthAction = ActionType<typeof authActions>;
 
-const { updateAuthUserLikedPixels, fetchAuthUser } = authActions;
+const { initAuthUser } = authActions;
 
 export interface IAuthState {
   readonly user: IAuthUserModel;
@@ -18,29 +18,15 @@ export const initialState: IAuthState = {
 export default combineReducers<IAuthState>({
   user: (state = initialState.user, action) => {
     switch (action.type) {
-      case getType(fetchAuthUser.request):
+      case getType(initAuthUser.request):
         return {}; // clear out existing data
 
-      case getType(fetchAuthUser.success):
+      case getType(initAuthUser.success):
         return action.payload;
 
-      case getType(fetchAuthUser.failure):
+      case getType(initAuthUser.failure):
         return state;
 
-      // ---------------- Like Pixels ------------------ //
-
-      case getType(updateAuthUserLikedPixels): {
-        const { id, likedPixels } = action.payload.user;
-
-        if (state.id === id) {
-          return {
-            ...state,
-            likedPixels
-          };
-        }
-
-        return state;
-      }
       default:
         return state;
     }

@@ -1,16 +1,20 @@
-import { PixelsGrid, PixelsGridItem } from "@modules/ui/structures/PixelsGrid";
-import { PixelsPreview } from "@modules/ui/structures/PixelsPreview";
-import { ProfileMasthead } from "@modules/ui/structures/ProfileMasthead";
-import { IBaseTheme, withStyles } from "@modules/ui/theme";
+import {
+  PixelsGrid,
+  PixelsGridItem
+} from "@modules/reactive-pixels-ui/structures/PixelsGrid";
+import { PixelsPreview } from "@modules/reactive-pixels-ui/structures/PixelsPreview";
+import { ProfileMasthead } from "@modules/reactive-pixels-ui/structures/ProfileMasthead";
+import { IBaseTheme, withStyles } from "@modules/reactive-pixels-ui/theme";
 import { PixelsComposer } from "@root/composers/PixelsComposer";
 import { UserComposer } from "@root/composers/UserComposer";
 import { css } from "emotion";
-import gql from "graphql-tag";
 import * as React from "react";
-import { Query } from "react-apollo";
 import { match } from "react-router";
 import { IPixelsModel } from "reactive-pixels-common/models/PixelsModel";
-import { compose } from "recompose";
+import ProfileSceneQuery, {
+  IData,
+  profileSceneQuery
+} from "./ProfileSceneQuery";
 
 interface IClasses {
   grid: string;
@@ -33,6 +37,28 @@ const styles = (theme: IBaseTheme): IClasses => {
 };
 
 class ProfileScene extends React.PureComponent<IProps> {
+  public addPixelsGridIteem = (item: IPixelsModel) => {
+    return (
+      <PixelsGridItem key={item.id}>
+        <PixelsComposer
+          loggedInUserId={""}
+          pixels={item}
+          render={pixelsData => (
+            <PixelsPreview
+              src={pixelsData.imageSrc}
+              to={pixelsData.url}
+              isLikedByLoggedInUser={pixelsData.isLikedByLoggedInUser}
+              likes={pixelsData.likes}
+              onUpdatePixelsLikesVariables={
+                pixelsData.onUpdatePixelsLikesVariables
+              }
+            />
+          )}
+        />
+      </PixelsGridItem>
+    );
+  };
+
   public render() {
     const { classes } = this.props;
     const { username } = this.props.match.params;
@@ -41,38 +67,16 @@ class ProfileScene extends React.PureComponent<IProps> {
       username
     };
 
-    const query = gql`
-      query Query($username: String!) {
-        user: getUser(username: $username) {
-          id
-          email
-          githubUserId
-          displayName
-          following
-          followers
-          likedPixels
-          username
-          location
-          isFirstLogin
-          pixels {
-            id
-            uid
-            title
-            owner
-            repo
-            likes
-          }
-        }
-      }
-    `;
-
     return (
-      <Query query={query} variables={variables}>
+      <ProfileSceneQuery query={profileSceneQuery} variables={variables}>
         {({ loading, error, data }) => {
           if (error) {
-            console.error(error);
-
             return <p>Oops...</p>;
+          }
+
+          if (loading || !data) {
+            // Our components now how to handle the loading states
+            data = {} as IData;
           }
 
           return (
@@ -88,33 +92,14 @@ class ProfileScene extends React.PureComponent<IProps> {
                 )}
               />
               <PixelsGrid className={classes.grid}>
-                {!loading &&
-                  data.user.pixels.map((item: IPixelsModel, index: number) => (
-                    <PixelsGridItem key={item.id || index}>
-                      <PixelsComposer
-                        loggedInUserId={""}
-                        pixels={item}
-                        render={pixelsData => (
-                          <PixelsPreview
-                            src={pixelsData.imageSrc}
-                            to={pixelsData.url}
-                            isLikedByLoggedInUser={
-                              pixelsData.isLikedByLoggedInUser
-                            }
-                            numberOfLikes={pixelsData.numberOfLikes}
-                            onPixelsLike={pixelsData.onPixelsLike}
-                          />
-                        )}
-                      />
-                    </PixelsGridItem>
-                  ))}
+                {data.user && data.user.pixels.map(this.addPixelsGridIteem)}
               </PixelsGrid>
             </React.Fragment>
           );
         }}
-      </Query>
+      </ProfileSceneQuery>
     );
   }
 }
 
-export default compose(withStyles(styles))(ProfileScene);
+export default withStyles(styles)(ProfileScene);

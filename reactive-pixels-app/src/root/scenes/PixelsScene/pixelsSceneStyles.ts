@@ -1,4 +1,4 @@
-import { IBaseTheme } from "@modules/ui/theme";
+import { IBaseTheme } from "@modules/reactive-pixels-ui/theme";
 import { css } from "emotion";
 
 export interface IClasses {

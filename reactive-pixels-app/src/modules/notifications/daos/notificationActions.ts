@@ -1,11 +1,12 @@
-// import { INotificationModel } from "@modules/notifications/models/NotificationModel";
 import { createStandardAction } from "typesafe-actions";
 
 const PREFIX = "@@notification";
 
+export type Notifications = "NOT_AUTHORISED" | "";
+
 export const showNotification = createStandardAction(
   `${PREFIX}/SHOW_NOTIFICATION`
-)<string>();
+)<Notifications>();
 
 export const hideNotification = createStandardAction(
   `${PREFIX}/HIDE_NOTIFICATION`

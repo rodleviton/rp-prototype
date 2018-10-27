@@ -1,31 +1,12 @@
 import { IAuthUserModel } from "reactive-pixels-common/models/AuthUserModel";
-import { createAsyncAction, createStandardAction } from "typesafe-actions";
+import { createAsyncAction } from "typesafe-actions";
 
 const PREFIX = "@@auth";
-
-// ---------------- Like Auth User Pixels ------------------ //
-/**
- * Note: this action is only triggered via proxy through the rootTransducer.
- * This avoids coupling actions between independent modules.
- */
-interface IUpdateAuthUserLikedPixels {
-  user: {
-    id: string;
-    likedPixels: string[];
-  };
-}
-
-export const updateAuthUserLikedPixels = createStandardAction(
-  `${PREFIX}/UPDATE_AUTH_USER_LIKED_PIXELS`
-)<IUpdateAuthUserLikedPixels>();
 
 // ---------------- INITIALISE SOCIAL AUTH ---------------- //
 
 export interface IInitAuthUserSuccess {
-  authToken: string;
-  githubUserId: string;
-  id: string;
-  refreshToken: string;
+  readonly user: IAuthUserModel;
 }
 
 // These action specifically cover the social auth provider flow
@@ -37,15 +18,3 @@ export const initAuthUser = createAsyncAction(
   `${PREFIX}/INIT_AUTH_USER_SUCCESS`,
   `${PREFIX}/INIT_AUTH_USER_FAILURE`
 )<void, IInitAuthUserSuccess, Error>();
-
-// ---------------- Fetch Authenticated User ---------------- //
-
-export interface IFetchAuthUserSuccess {
-  readonly user: IAuthUserModel;
-}
-
-export const fetchAuthUser = createAsyncAction(
-  `${PREFIX}/FETCH_AUTH_USER_REQUEST`,
-  `${PREFIX}/FETCH_AUTH_USER_SUCCESS`,
-  `${PREFIX}/FETCH_AUTH_USER_FAILURE`
-)<void, IFetchAuthUserSuccess, Error>();

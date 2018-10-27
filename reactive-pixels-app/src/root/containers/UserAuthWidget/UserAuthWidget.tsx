@@ -1,10 +1,10 @@
 import { GithubStrategy } from "@modules/auth/components/GithubStrategy";
 import { SocialAuth } from "@modules/auth/components/SocialAuth";
 import { IAuthState } from "@modules/auth/daos/authReducer";
-import { LoginButton } from "@modules/ui/structures/LoginButton";
-import { ProfileSticker } from "@modules/ui/structures/ProfileSticker";
-import { IBaseTheme, withStyles } from "@modules/ui/theme";
-import { ResponsiveConsumer } from "@modules/ui/theme/ResponsiveProvider";
+import { LoginButton } from "@modules/reactive-pixels-ui/structures/LoginButton";
+import { ProfileSticker } from "@modules/reactive-pixels-ui/structures/ProfileSticker";
+import { IBaseTheme, withStyles } from "@modules/reactive-pixels-ui/theme";
+import { ResponsiveConsumer } from "@modules/reactive-pixels-ui/theme/ResponsiveProvider";
 import { AuthComposer } from "@root/composers/AuthComposer";
 import { UserComposer } from "@root/composers/UserComposer";
 import { IRootState } from "@root/daos/rootReducer";

@@ -6,7 +6,7 @@ export type NotificationAction = ActionType<typeof notificationActions>;
 const { hideNotification, showNotification } = notificationActions;
 
 export interface INotificationsState {
-  modalType: string;
+  modalType: notificationActions.Notifications;
 }
 
 export const initialState: INotificationsState = {
