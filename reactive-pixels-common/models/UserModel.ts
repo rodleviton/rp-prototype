@@ -1,3 +1,5 @@
+import { IPixelsModel } from "./PixelsModel";
+
 export interface IUserModel {
   id: string;
   email: string;
@@ -11,4 +13,8 @@ export interface IUserModel {
   creationTime: number;
   lastSignInTime: number;
   isFirstLogin: boolean;
+}
+
+export interface IUserExtendedModel extends IUserModel {
+  pixels: IPixelsModel[];
 }

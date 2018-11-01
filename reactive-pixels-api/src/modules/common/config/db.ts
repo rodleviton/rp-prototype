@@ -2,7 +2,6 @@ import * as admin from "firebase-admin";
 import { resolvePath } from "./paths";
 
 if (process.env.NODE_ENV !== "production") {
-  // !!NEVER DEPLOY SERVICE ACCOUNT KEY!!
   const serviceAccount = resolvePath("serviceAccountKey.json");
 
   admin.initializeApp({

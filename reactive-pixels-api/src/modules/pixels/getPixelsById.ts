@@ -1,4 +1,4 @@
-import { handleDocument } from "../../common";
+import { handleDocument } from "../common/helpers/handleDocument";
 import { IPixelsModel } from "reactive-pixels-common/models/PixelsModel";
 import { DocumentSnapshot, Firestore } from "@google-cloud/firestore";
 

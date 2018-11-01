@@ -1,7 +1,5 @@
-import {
-  getCollectionWithFilters,
-  handleDocumentCollection
-} from "../../common";
+import { getCollectionWithFilters } from "../common/helpers/getCollectionWithFilters";
+import { handleDocumentCollection } from "../common/helpers/handleDocumentCollection";
 import { IUserModel } from "reactive-pixels-common/models/UserModel";
 import { QuerySnapshot, Firestore } from "@google-cloud/firestore";
 import { ApolloError } from "apollo-server-express";

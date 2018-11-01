@@ -1,9 +1,9 @@
-import { UpdatePixelsLikesMethod } from "@modules/graphql/UpdatePixelsLikesMutation";
 import {
   buildPixelsPreviewRoute,
   buildPixelsRoute,
   buildPixelsSandboxRoute
 } from "@root/helpers/routeBuilder";
+import { UpdatePixelsLikesMethod } from "@root/hoc/withLikePixelsHandler";
 import * as React from "react";
 import { IPixelsModel } from "reactive-pixels-common/models/PixelsModel";
 
@@ -50,7 +50,7 @@ class PixelsComposer extends React.PureComponent<IProps> {
   public render() {
     const { render, pixels } = this.props;
 
-    if (!pixels) {
+    if (!pixels || !pixels.id) {
       return render({} as IPixelsData);
     }
 

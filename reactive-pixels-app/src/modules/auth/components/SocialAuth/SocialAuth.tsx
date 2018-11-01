@@ -1,23 +1,12 @@
 import { initAuthUser } from "@modules/auth/daos/authActions";
 import * as firebase from "firebase/app";
-import gql from "graphql-tag";
 import * as React from "react";
-import { ApolloConsumer } from "react-apollo";
 import { connect } from "react-redux";
 import { Dispatch } from "redux";
 import { ActionType } from "typesafe-actions";
 
 interface IProps {
   dispatch: Dispatch<ActionType<typeof initAuthUser>>;
-}
-
-interface IState {
-  authUser: {
-    authToken: string;
-    githubUserId: string;
-    id: string;
-    refreshToken: string;
-  };
 }
 
 export interface IProviderData {
@@ -39,33 +28,7 @@ export const SocialAuthContext = React.createContext<IHandleAuthClick>(
   {} as IHandleAuthClick
 );
 
-const query = gql`
-  query User($id: ID!) {
-    authUser: getUserById(id: $id) {
-      id
-      email
-      githubUserId
-      displayName
-      following
-      followers
-      likedPixels
-      username
-      location
-      isFirstLogin
-    }
-  }
-`;
-
-class SocialAuth extends React.Component<IProps, IState> {
-  public state = {
-    authUser: {
-      authToken: "",
-      githubUserId: "",
-      id: "",
-      refreshToken: ""
-    }
-  };
-
+class SocialAuth extends React.Component<IProps> {
   public componentWillMount() {
     firebase.auth().onAuthStateChanged(user => {
       this.addAuthenticatedUser(user as IAuthUser);
@@ -73,16 +36,18 @@ class SocialAuth extends React.Component<IProps, IState> {
   }
 
   public addAuthenticatedUser(authUser: IAuthUser) {
+    const { dispatch } = this.props;
+
     if (authUser) {
       authUser.getIdToken().then((authToken: string) => {
-        this.setState({
-          authUser: {
+        dispatch(
+          initAuthUser.success({
             authToken,
             githubUserId: authUser.providerData[0].uid,
             id: authUser.uid,
             refreshToken: authUser.refreshToken
-          }
-        });
+          })
+        );
       });
     }
   }
@@ -94,46 +59,15 @@ class SocialAuth extends React.Component<IProps, IState> {
     firebase.auth().signInWithPopup(provider);
   };
 
-  public getAuthUser = async (client: any) => {
-    const { dispatch } = this.props;
-    const { authUser } = this.state;
-
-    const { data } = await client.query({
-      query,
-      variables: { id: authUser.id }
-    });
-
-    dispatch(
-      initAuthUser.success({
-        ...authUser,
-        ...data.authUser
-      })
-    );
-  };
-
   public render() {
     const { children } = this.props;
-    const { authUser } = this.state;
 
     return (
-      <ApolloConsumer>
-        {client => {
-          if (authUser.id) {
-            // As soon as we have an id let go get or create the user
-            this.getAuthUser(client);
-          }
-
-          return (
-            <SocialAuthContext.Provider
-              value={{ onAuth: this.handleAuthClick }}
-            >
-              {children}
-            </SocialAuthContext.Provider>
-          );
-        }}
-      </ApolloConsumer>
+      <SocialAuthContext.Provider value={{ onAuth: this.handleAuthClick }}>
+        {children}
+      </SocialAuthContext.Provider>
     );
   }
 }
 
-export default connect(null)(SocialAuth);
+export default connect()(SocialAuth);

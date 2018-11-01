@@ -18,6 +18,7 @@ const withSvg = <WrappedProps extends {}>(
           width={`${defaultSize}px`}
           height={`${defaultSize}px`}
           viewBox={`0 0 ${defaultSize} ${defaultSize}`}
+          {...otherProps}
         >
           <WrappedComponent {...otherProps} />
         </svg>

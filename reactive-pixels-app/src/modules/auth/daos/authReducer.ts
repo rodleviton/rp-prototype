@@ -5,7 +5,7 @@ import { ActionType, getType } from "typesafe-actions";
 
 export type AuthAction = ActionType<typeof authActions>;
 
-const { initAuthUser } = authActions;
+const { initAuthUser, logoutAuthUser } = authActions;
 
 export interface IAuthState {
   readonly user: IAuthUserModel;
@@ -26,6 +26,9 @@ export default combineReducers<IAuthState>({
 
       case getType(initAuthUser.failure):
         return state;
+
+      case getType(logoutAuthUser):
+        return {}; // clear out existing data
 
       default:
         return state;

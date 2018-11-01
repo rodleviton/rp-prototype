@@ -1,7 +1,5 @@
-import {
-  getCollectionWithFilters,
-  handleDocumentCollection
-} from "../../common";
+import { getCollectionWithFilters } from "../common/helpers/getCollectionWithFilters";
+import { handleDocumentCollection } from "../common/helpers/handleDocumentCollection";
 import { IPixelsModel } from "reactive-pixels-common/models/PixelsModel";
 import { QuerySnapshot, Firestore } from "@google-cloud/firestore";
 

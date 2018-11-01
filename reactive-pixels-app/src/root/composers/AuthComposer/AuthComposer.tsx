@@ -1,9 +1,9 @@
 import { IAuthState } from "@modules/auth/daos/authReducer";
 import * as React from "react";
-import { IUserModel } from "reactive-pixels-common/models/UserModel";
+import { IAuthUserModel } from "reactive-pixels-common/models/AuthUserModel";
 
 interface IAuthData {
-  user: IUserModel;
+  user: IAuthUserModel;
   isAuthenticated: boolean;
 }
 

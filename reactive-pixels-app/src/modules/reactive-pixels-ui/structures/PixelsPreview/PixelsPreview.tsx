@@ -1,4 +1,3 @@
-import { PixelsLikeButton } from "@root/containers/PixelsLikeButton";
 import classnames from "classnames";
 import { css } from "emotion";
 import * as React from "react";
@@ -18,9 +17,6 @@ interface IProps {
   className?: string;
   src: string;
   to: string;
-  isLikedByLoggedInUser: boolean;
-  likes: string[];
-  onUpdatePixelsLikesVariables: () => void;
 }
 
 const styles = (theme: IBaseTheme): IClasses => {
@@ -43,37 +39,24 @@ const styles = (theme: IBaseTheme): IClasses => {
  */
 export class PixelsPreview extends React.PureComponent<IProps> {
   public render() {
-    const {
-      classes,
-      className,
-      isLikedByLoggedInUser,
-      likes,
-      onUpdatePixelsLikesVariables,
-      src,
-      to,
-      ...otherProps
-    } = this.props;
+    const { classes, className, src, to, ...otherProps } = this.props;
 
     return (
-      <PixelsLikeButton
-        onUpdatePixelsLikesVariables={onUpdatePixelsLikesVariables}
-        isLikedByLoggedInUser={isLikedByLoggedInUser}
-        likes={likes}
+      <Link
+        to={to}
         className={classnames(className, classes.root)}
         {...otherProps}
       >
-        <Link to={to}>
-          <PixelsCard>
-            <ImageLoader
-              className={classnames(className, classes.root)}
-              height={460}
-              width={340}
-              src={src}
-            />
-            <Loader className={classes.loader} />
-          </PixelsCard>
-        </Link>
-      </PixelsLikeButton>
+        <PixelsCard>
+          <ImageLoader
+            className={classnames(className, classes.root)}
+            height={460}
+            width={340}
+            src={src}
+          />
+          <Loader className={classes.loader} />
+        </PixelsCard>
+      </Link>
     );
   }
 }

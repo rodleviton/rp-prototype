@@ -3,7 +3,7 @@ import { ApolloError, AuthenticationError } from "apollo-server-express";
 import {
   FirebaseApiResponseCodes,
   FirebaseApiResponseTypes
-} from "../../../models";
+} from "../constants";
 
 export interface IdToken {
   iss: string;

@@ -21,19 +21,19 @@ const styles = (theme: IBaseTheme): IHeaderClasses => {
   const { spacers } = theme.sizes;
 
   return {
-    brand: css({}),
+    brand: css({
+      paddingLeft: spacers.small * 1.5,
+      [`@media (min-width: ${breakpoints.medium}px)`]: {
+        paddingLeft: spacers.medium * 1.5
+      }
+    }),
     root: css({
       height: 90,
       justifyContent: "space-between",
-      paddingLeft: spacers.small * 1.5,
-      paddingRight: spacers.small * 1.5,
+
       position: "fixed",
       top: 0,
-      zIndex: 100,
-      [`@media (min-width: ${breakpoints.medium}px)`]: {
-        paddingLeft: spacers.medium * 1.5,
-        paddingRight: spacers.medium * 1.5
-      }
+      zIndex: 100
     })
   };
 };

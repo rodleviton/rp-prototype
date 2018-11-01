@@ -1,18 +1,22 @@
 import { IAuthState } from "@modules/auth/daos/authReducer";
-import GetUserAndPixelsByUsernameQuery, {
-  GET_USER_AND_PIXELS_BY_USERNAME,
-  IData
-} from "@modules/graphql/GetUserAndPixelsByUsernameQuery";
 import { Box } from "@modules/reactive-pixels-ui/components/Box";
 import { PixelsSandbox } from "@modules/reactive-pixels-ui/structures/PixelsSandbox";
+import { PixelsWrapper } from "@modules/reactive-pixels-ui/structures/PixelsWrapper";
 import { ProfileSticker } from "@modules/reactive-pixels-ui/structures/ProfileSticker";
 import { IBaseTheme, withStyles } from "@modules/reactive-pixels-ui/theme";
 import { PixelsComposer } from "@root/composers/PixelsComposer";
 import { UserComposer } from "@root/composers/UserComposer";
-import { IRootState } from "@root/daos/rootReducer";
+import { PixelsLikeButton } from "@root/containers/PixelsLikeButton";
+import withAuth from "@root/hoc/withAuth";
+import withPixels, {
+  IGetPixelsData,
+  IGetPixelsProps
+} from "@root/hoc/withPixels";
 import { css } from "emotion";
 import * as React from "react";
-import { connect } from "react-redux";
+import { ChildProps, compose } from "react-apollo";
+import { IPixelsModel } from "reactive-pixels-common/models/PixelsModel";
+import { IUserModel } from "reactive-pixels-common/models/UserModel";
 
 interface IClasses {
   sticker: string;
@@ -35,71 +39,66 @@ const styles = (theme: IBaseTheme): IClasses => {
   };
 };
 
-class PixelsHero extends React.PureComponent<IProps> {
+class PixelsHero extends React.PureComponent<
+  ChildProps<IGetPixelsProps & IProps, IGetPixelsData>
+> {
   public render() {
-    const { auth, classes, pixelsId, username } = this.props;
+    const { auth, classes, data } = this.props;
+
+    // We cast empty data to expected type and let
+    // component look after pending state
+    let user = {} as IUserModel;
+    let pixels = {} as IPixelsModel;
+
+    if (data && data.user && data.pixels) {
+      user = data.user;
+      pixels = data.pixels;
+    }
 
     return (
-      <GetUserAndPixelsByUsernameQuery
-        query={GET_USER_AND_PIXELS_BY_USERNAME}
-        variables={{
-          id: pixelsId,
-          username
-        }}
-      >
-        {({ loading, error, data }) => {
-          if (error) {
-            return <p>Oops...</p>;
-          }
-
-          if (loading || !data) {
-            // Our components know how to handle an empty data set
-            data = {} as IData;
-          }
-
-          return (
-            <Box>
-              <UserComposer
-                user={data.user}
-                render={userData => (
-                  <ProfileSticker
-                    align="left"
-                    className={classes.sticker}
-                    subheading="Created by"
-                    avatar={userData.avatarUrl}
-                    name={userData.displayName}
-                    url={userData.url}
-                  />
-                )}
+      <Box>
+        <UserComposer
+          user={user}
+          render={userData => (
+            <React.Fragment>
+              <ProfileSticker
+                align="left"
+                className={classes.sticker}
+                subheading="Created by"
+                avatar={userData.avatarUrl}
+                name={userData.displayName}
+                url={userData.url}
               />
+
               <PixelsComposer
                 loggedInUserId={auth.user.id}
-                pixels={data.pixels}
+                pixels={pixels}
                 render={pixelsData => {
                   return (
-                    <PixelsSandbox
-                      src={pixelsData.iframeSrc}
-                      isLikedByLoggedInUser={pixelsData.isLikedByLoggedInUser}
-                      onUpdatePixelsLikesVariables={
-                        pixelsData.onUpdatePixelsLikesVariables
-                      }
-                      likes={pixelsData.likes}
-                    />
+                    <PixelsWrapper>
+                      <PixelsSandbox src={pixelsData.iframeSrc} />
+                      <PixelsLikeButton
+                        isLikedByLoggedInUser={pixelsData.isLikedByLoggedInUser}
+                        onUpdatePixelsLikesVariables={
+                          pixelsData.onUpdatePixelsLikesVariables
+                        }
+                        likes={pixelsData.likes}
+                        userLikedPixels={userData.likedPixels}
+                      />
+                    </PixelsWrapper>
                   );
                 }}
               />
-            </Box>
-          );
-        }}
-      </GetUserAndPixelsByUsernameQuery>
+            </React.Fragment>
+          )}
+        />
+      </Box>
     );
   }
 }
 
-const mapStateToProp = (state: IRootState) => {
-  return {
-    auth: state.auth
-  };
-};
-
-export default connect(mapStateToProp)(withStyles(styles)(PixelsHero));
+export default compose(
+  withAuth,
+  withPixels,
+  withStyles(styles)
+)(PixelsHero);

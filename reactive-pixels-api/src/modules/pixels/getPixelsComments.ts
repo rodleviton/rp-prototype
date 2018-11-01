@@ -1,4 +1,4 @@
-import { handleDocumentCollection } from "../../common";
+import { handleDocumentCollection } from "../common/helpers/handleDocumentCollection";
 import { IPixelsCommentModel } from "reactive-pixels-common/models/PixelsCommentModel";
 import { QuerySnapshot, Firestore } from "@google-cloud/firestore";
 
