@@ -72,7 +72,6 @@ const fontVariants: IFontVariants = {
   body1: {
     fontFamily: fontFamilyBase,
     fontSize: fontSizeBase,
-    // fontWeight: fontWeights.normal,
     letterSpacing: 0,
     lineHeight: 28,
     marginBottom: paragraphMarginBottom
@@ -80,26 +79,22 @@ const fontVariants: IFontVariants = {
   body2: {
     fontFamily: fontFamilyBase,
     fontSize: fontSizeSmall,
-    // fontWeight: fontWeights.normal,
     letterSpacing: 0,
     lineHeight: 22,
     marginBottom: paragraphMarginBottom
   },
   button: {
     fontFamily: fontFamilyBase,
-    fontSize: fontSizeExtraSmall
-    // fontWeight: fontWeights.normal
+    fontSize: fontSizeSmall
   },
   buttonLarge: {
     fontFamily: fontFamilyBase,
     fontSize: fontSizeBase,
-    // fontWeight: fontWeights.normal,
     letterSpacing: 0
   },
   display1: {
     fontFamily: fontFamilyHeading,
     fontSize: 32,
-    // fontWeight: fontWeights.bold,
     letterSpacing: 0,
     marginBottom: headingMarginBottom,
     marginTop: headingMarginBottom / 2
@@ -107,7 +102,6 @@ const fontVariants: IFontVariants = {
   display2: {
     fontFamily: fontFamilyHeading,
     fontSize: 28,
-    // fontWeight: fontWeights.bold,
     letterSpacing: 0,
     marginBottom: headingMarginBottom,
     marginTop: headingMarginBottom / 2
@@ -115,7 +109,6 @@ const fontVariants: IFontVariants = {
   display3: {
     fontFamily: fontFamilyHeading,
     fontSize: 22,
-    // fontWeight: fontWeights.bold,
     letterSpacing: 0,
     marginBottom: headingMarginBottom,
     marginTop: headingMarginBottom / 2
@@ -123,7 +116,6 @@ const fontVariants: IFontVariants = {
   display4: {
     fontFamily: fontFamilyHeading,
     fontSize: 18,
-    // fontWeight: fontWeights.normal,
     letterSpacing: 0,
     marginBottom: headingMarginBottom,
     marginTop: headingMarginBottom / 2
@@ -131,7 +123,6 @@ const fontVariants: IFontVariants = {
   display5: {
     fontFamily: fontFamilyHeading,
     fontSize: 14,
-    // fontWeight: fontWeights.normal,
     letterSpacing: 0,
     marginBottom: headingMarginBottom,
     marginTop: headingMarginBottom / 2
@@ -139,7 +130,6 @@ const fontVariants: IFontVariants = {
   display6: {
     fontFamily: fontFamilyHeading,
     fontSize: 12,
-    // fontWeight: fontWeights.normal,
     letterSpacing: 0,
     marginBottom: headingMarginBottom,
     marginTop: headingMarginBottom / 2
@@ -153,13 +143,11 @@ const fontVariants: IFontVariants = {
   small: {
     fontFamily: fontFamilyBase,
     fontSize: fontSizeExtraSmall,
-    // fontWeight: fontWeights.normal,
     lineHeight: fontSizeExtraSmall
   },
   subheading: {
     fontFamily: fontFamilyBase,
     fontSize: fontSizeBase * 1.25, // 20px
-    // fontWeight: fontWeights.normal,
     letterSpacing: 0,
     lineHeight: 32,
     marginBottom: paragraphMarginBottom

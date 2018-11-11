@@ -11,6 +11,7 @@ import Cross from "./Icons/Cross";
 import Github from "./Icons/Github";
 import Heart from "./Icons/Heart";
 import Logout from "./Icons/Logout";
+import Pin from "./Icons/Pin";
 import Success from "./Icons/Success";
 import withSvg from "./withSvg";
 
@@ -27,6 +28,7 @@ class Icon extends React.PureComponent {
   public static Github = withSvg(Github);
   public static Heart = withSvg(Heart);
   public static Logout = withSvg(Logout);
+  public static Pin = withSvg(Pin);
   public static Success = withSvg(Success);
 
   /**

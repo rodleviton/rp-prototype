@@ -67,6 +67,8 @@ export class PixelsLikeButton extends React.PureComponent<IProps> {
 
     if (!auth.user.id) {
       dispatch(showNotification("NOT_AUTHORISED"));
+
+      return;
     }
 
     onPixelsLike({

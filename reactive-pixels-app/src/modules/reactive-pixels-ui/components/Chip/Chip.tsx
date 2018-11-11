@@ -16,16 +16,17 @@ interface IProps {
 const styles = (theme: IBaseTheme): IChipClasses => {
   const { spacers } = theme.sizes;
   const { palette } = theme.colours;
+  const { fontSizeExtraSmall } = theme.typography;
 
   return {
     root: css({
       alignItems: "center",
-      background: palette.grey2.hex,
+      background: palette.grey1.hex,
       borderRadius: 12,
       color: palette.white.hex,
       display: "inline-flex",
       flexGrow: 0,
-      fontSize: "1rem",
+      fontSize: fontSizeExtraSmall,
       height: 24,
       paddingLeft: spacers.medium,
       paddingRight: spacers.medium,

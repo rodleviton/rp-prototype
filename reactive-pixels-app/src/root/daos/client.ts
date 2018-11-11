@@ -1,6 +1,7 @@
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloClient } from "apollo-client";
 import { setContext } from "apollo-link-context";
+import { onError } from "apollo-link-error";
 import { createHttpLink } from "apollo-link-http";
 import store from "./rootStore";
 
@@ -21,9 +22,16 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+const errorLink = onError(({ networkError }) => {
+  if (networkError) {
+    console.log(`[Network error]: ${networkError}`);
+    store.dispatch({ type: "NETWORK_ERROR" });
+  }
+});
+
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: authLink.concat(httpLink)
+  link: errorLink.concat(authLink.concat(httpLink))
 });
 
 export default client;
