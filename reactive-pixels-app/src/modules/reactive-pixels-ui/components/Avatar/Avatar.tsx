@@ -22,7 +22,7 @@ interface IProps {
 }
 
 const styles = (theme: IBaseTheme): IClasses => {
-  const { palette } = theme.colours;
+  const { borderColourDark, palette } = theme.colours;
 
   return {
     large: css({
@@ -41,7 +41,7 @@ const styles = (theme: IBaseTheme): IClasses => {
     }),
     root: css({
       background: palette.white.hex,
-      border: `2px solid ${palette.grey2.hex}`,
+      border: `2px solid ${borderColourDark}`,
       overflow: "hidden"
     }),
     small: css({

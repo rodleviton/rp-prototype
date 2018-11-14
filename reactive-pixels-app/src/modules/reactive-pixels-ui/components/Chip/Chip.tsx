@@ -16,7 +16,7 @@ interface IProps {
 const styles = (theme: IBaseTheme): IChipClasses => {
   const { spacers } = theme.sizes;
   const { palette } = theme.colours;
-  const { fontSizeExtraSmall } = theme.typography;
+  const { fontWeights, fontSizeExtraSmall } = theme.typography;
 
   return {
     root: css({
@@ -27,6 +27,7 @@ const styles = (theme: IBaseTheme): IChipClasses => {
       display: "inline-flex",
       flexGrow: 0,
       fontSize: fontSizeExtraSmall,
+      fontWeight: fontWeights.bold,
       height: 24,
       paddingLeft: spacers.medium,
       paddingRight: spacers.medium,

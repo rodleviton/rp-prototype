@@ -94,6 +94,9 @@ class UserProfile extends React.Component<
                 avatarUrl={userData.avatarUrl}
                 displayName={userData.displayName}
                 location={userData.location}
+                numberOfFollowers={userData.numberOfFollowers}
+                numberOfFollowing={userData.numberOfFollowing}
+                numberOfPixels={pixels.length}
               />
 
               <PixelsGrid className={classes.grid}>

@@ -31,6 +31,7 @@ interface IProps {
   headlineMapping?: Headings;
   margin?: boolean;
   className?: string;
+  skeleton?: boolean;
   variant?: Variants;
 }
 
@@ -47,11 +48,12 @@ export interface IClasses {
   light: string;
   noMargin: string;
   normal: string;
+  skeleton: any;
 }
 
 export const styles = (theme: IBaseTheme): IClasses => {
   const { fontWeights, fontVariants } = theme.typography;
-  const { headingColourDark, headingColourLight } = theme.colours;
+  const { headingColourDark, headingColourLight, palette } = theme.colours;
 
   return {
     bold: css({
@@ -90,7 +92,26 @@ export const styles = (theme: IBaseTheme): IClasses => {
     }),
     normal: css({
       fontWeight: fontWeights.normal
-    })
+    }),
+    skeleton: {
+      h3: css({
+        borderRadius: 8,
+        height: 16,
+        marginBottom: 6,
+        marginTop: 8,
+        width: "100%"
+      }),
+      h6: css({
+        borderRadius: 4,
+        height: 8,
+        marginBottom: 4,
+        marginTop: 5,
+        width: "60%"
+      }),
+      root: css({
+        background: palette.grey5.hex
+      })
+    }
   };
 };
 
@@ -121,6 +142,7 @@ class Heading extends React.PureComponent<IProps> {
       headlineMapping,
       margin = true,
       className,
+      skeleton,
       variant = "display1",
       ...otherProps
     } = this.props;
@@ -135,6 +157,19 @@ class Heading extends React.PureComponent<IProps> {
 
     // Set h1, h2, h3, h4, h5 or h6
     const Tag = `h${heading}`;
+
+    if (skeleton && !children) {
+      // if (skeleton) {
+      return (
+        <div
+          className={classnames(
+            classes.skeleton.root,
+            classes.skeleton[Tag],
+            marginStyles
+          )}
+        />
+      );
+    }
 
     return (
       <Tag

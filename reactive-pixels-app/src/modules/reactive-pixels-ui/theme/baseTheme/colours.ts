@@ -18,6 +18,7 @@ interface IPalette {
 export interface IColours {
   backgroundColour: string;
   borderColour: string;
+  borderColourDark: string;
   headingColourDark: string;
   headingColourLight: string;
   linkColour: string;
@@ -31,7 +32,7 @@ const baseColours = {
   amber: "#ffbd00",
   black: "#000000",
   charcoal: "#252527",
-  darkGrey: "#CCCCCC",
+  darkGrey: "#828282",
   grey: "#E6E6E6",
   lightGrey: "#F7F7F7",
   lineGrey: "#9C9CA0",
@@ -80,6 +81,7 @@ const palette: IPalette = {
 
 const backgroundColour = baseColours.white;
 const borderColour = baseColours.grey;
+const borderColourDark = baseColours.darkGrey;
 const linkColour = baseColours.black;
 const headingColourDark = baseColours.charcoal;
 const headingColourLight = baseColours.white;
@@ -89,6 +91,7 @@ const textColourLight = baseColours.white;
 export default {
   backgroundColour,
   borderColour,
+  borderColourDark,
   headingColourDark,
   headingColourLight,
   linkColour,

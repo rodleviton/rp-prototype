@@ -34,6 +34,7 @@ interface IFontVariants {
 
 interface IFontWeights {
   bold: "600";
+  extraBold: "700";
   normal: "400";
 }
 
@@ -65,7 +66,8 @@ const headingMarginBottom = sizes.spacers.medium;
 
 const fontWeights: IFontWeights = {
   bold: "600",
-  normal: "400"
+  extraBold: "700",
+  normal: "400",
 };
 
 const fontVariants: IFontVariants = {

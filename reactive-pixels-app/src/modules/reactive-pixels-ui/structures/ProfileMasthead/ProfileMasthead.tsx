@@ -18,6 +18,7 @@ interface IClasses {
   location: string;
   pin: string;
   root: string;
+  stat: string;
   user: string;
 }
 
@@ -27,11 +28,15 @@ interface IProps {
   className?: string;
   displayName: string;
   location: string;
+  numberOfFollowers: number;
+  numberOfFollowing: number;
+  numberOfPixels: number;
 }
 
 const styles = (theme: IBaseTheme): IClasses => {
-  const { palette } = theme.colours;
+  const { borderColour, palette } = theme.colours;
   const { spacers } = theme.sizes;
+  const { fontVariants, fontWeights } = theme.typography;
 
   return {
     appBar: css({
@@ -62,12 +67,21 @@ const styles = (theme: IBaseTheme): IClasses => {
     root: css({
       alignItems: "center",
       background: palette.white.hex,
+      borderBottom: `1px solid ${borderColour}`,
       display: "flex",
       justifyContent: "center",
       paddingBottom: spacers.large,
       paddingTop: spacers.large,
       position: "relative",
       width: "100%"
+    }),
+    stat: css({
+      margin: "0 10px",
+      ["> span"]: {
+        ...fontVariants.display3,
+        color: palette.grey3.hex,
+        fontWeight: fontWeights.extraBold
+      }
     }),
     user: css({
       marginBottom: spacers.medium
@@ -90,6 +104,9 @@ export class ProfileMasthead extends React.PureComponent<IProps> {
       classes,
       displayName,
       location,
+      numberOfFollowers,
+      numberOfFollowing,
+      numberOfPixels,
       ...otherProps
     } = this.props;
 
@@ -97,7 +114,13 @@ export class ProfileMasthead extends React.PureComponent<IProps> {
       <header className={classnames(className, classes.root)} {...otherProps}>
         <div className={classes.content}>
           <div className={classes.avatarWrapper}>
-            <Avatar className={classes.avatar} url={avatarUrl} size="large" />
+            <Avatar
+              className={classes.avatar}
+              url={avatarUrl}
+              size="large"
+              variant="dark"
+              skeleton={true}
+            />
             <Chip label="PRO" />
           </div>
           <div>
@@ -108,19 +131,36 @@ export class ProfileMasthead extends React.PureComponent<IProps> {
                 variant="display3"
                 margin={false}
                 className={classes.displayName}
+                skeleton={true}
               >
                 {displayName}
               </Heading>
               <div className={classes.location}>
                 <Icon.Pin className={classes.pin} />
-                <Heading variant="display6" colour="dark" margin={false}>
+
+                <Heading
+                  variant="display6"
+                  colour="dark"
+                  margin={false}
+                  skeleton={true}
+                >
                   {location}
                 </Heading>
               </div>
             </div>
             <Button variant="primary">Following</Button>
 
-            <AppBar className={classes.appBar} />
+            <AppBar className={classes.appBar}>
+              <div className={classes.stat}>
+                <span>{numberOfPixels}</span> Pixels
+              </div>
+              <div className={classes.stat}>
+                <span>{numberOfFollowing}</span> Following
+              </div>
+              <div className={classes.stat}>
+                <span>{numberOfFollowers}</span> Followers
+              </div>
+            </AppBar>
           </div>
         </div>
       </header>

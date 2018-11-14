@@ -8,6 +8,8 @@ import {
 interface IUserData extends IUserModel {
   avatarUrl: string;
   url: string;
+  numberOfFollowers: number;
+  numberOfFollowing: number;
 }
 
 interface IUserExtendedData extends IUserExtendedModel {
@@ -19,6 +21,7 @@ interface IProps {
   user: IUserModel | IUserExtendedModel;
   render: (data: IUserData) => React.ReactNode;
 }
+
 /**
  * UserComposer
  *
@@ -33,11 +36,16 @@ class UserComposer extends React.PureComponent<IProps> {
     const { render, user } = this.props;
 
     if (!user || !user.id) {
-      return render({} as IUserData);
+      return render({
+        numberOfFollowers: 0,
+        numberOfFollowing: 0
+      } as IUserData);
     }
 
     const userData: IUserData | IUserExtendedData = {
       avatarUrl: `https://github.com/${user.username}.png`,
+      numberOfFollowers: user.followers.length,
+      numberOfFollowing: user.following.length,
       url: `/${user.username}`,
       ...user
     };
