@@ -1,11 +1,13 @@
 import { IAuthState } from "@modules/auth/daos/authReducer";
+import { Masthead } from "@modules/reactive-pixels-ui/structures/Masthead";
 import {
   PixelsGrid,
   PixelsGridItem
 } from "@modules/reactive-pixels-ui/structures/PixelsGrid";
 import { PixelsPreview } from "@modules/reactive-pixels-ui/structures/PixelsPreview";
 import { PixelsWrapper } from "@modules/reactive-pixels-ui/structures/PixelsWrapper";
-import { ProfileMasthead } from "@modules/reactive-pixels-ui/structures/ProfileMasthead";
+import { ProfileCard } from "@modules/reactive-pixels-ui/structures/ProfileCard";
+import { ProfileStats } from "@modules/reactive-pixels-ui/structures/ProfileStats";
 import { IBaseTheme, withStyles } from "@modules/reactive-pixels-ui/theme";
 import { PixelsComposer } from "@root/composers/PixelsComposer";
 import { UserComposer } from "@root/composers/UserComposer";
@@ -20,6 +22,7 @@ import * as React from "react";
 import { ChildProps, compose } from "react-apollo";
 import { IPixelsModel } from "reactive-pixels-common/models/PixelsModel";
 import { IUserModel } from "reactive-pixels-common/models/UserModel";
+import { FollowUserButton } from "../FollowUserButton";
 
 interface IClasses {
   grid: string;
@@ -90,14 +93,20 @@ class UserProfile extends React.Component<
           user={user}
           render={userData => (
             <React.Fragment>
-              <ProfileMasthead
-                avatarUrl={userData.avatarUrl}
-                displayName={userData.displayName}
-                location={userData.location}
-                numberOfFollowers={userData.numberOfFollowers}
-                numberOfFollowing={userData.numberOfFollowing}
-                numberOfPixels={pixels.length}
-              />
+              <Masthead>
+                <ProfileCard
+                  avatarUrl={userData.avatarUrl}
+                  displayName={userData.displayName}
+                  location={userData.location}
+                >
+                  <FollowUserButton />
+                  <ProfileStats
+                    numberOfFollowers={userData.numberOfFollowers}
+                    numberOfFollowing={userData.numberOfFollowing}
+                    numberOfPixels={pixels.length}
+                  />
+                </ProfileCard>
+              </Masthead>
 
               <PixelsGrid className={classes.grid}>
                 {pixels.map(item => this.addPixelsGridItem(item, userData))}

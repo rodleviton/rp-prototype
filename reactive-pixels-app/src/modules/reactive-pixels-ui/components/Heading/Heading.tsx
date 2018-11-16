@@ -32,6 +32,7 @@ interface IProps {
   margin?: boolean;
   className?: string;
   skeleton?: boolean;
+  skeletonWidth?: string;
   variant?: Variants;
 }
 
@@ -94,22 +95,47 @@ export const styles = (theme: IBaseTheme): IClasses => {
       fontWeight: fontWeights.normal
     }),
     skeleton: {
+      dark: css({
+        background: palette.grey5.hex
+      }),
+      h1: css({
+        // borderRadius: 8,
+        // height: 16,
+        // marginBottom: 6,
+        // marginTop: 8
+      }),
+      h2: css({
+        // borderRadius: 8,
+        // height: 16,
+        // marginBottom: 6,
+        // marginTop: 8
+      }),
       h3: css({
         borderRadius: 8,
         height: 16,
         marginBottom: 6,
-        marginTop: 8,
-        width: "100%"
+        marginTop: 8
+      }),
+      h4: css({
+        // borderRadius: 8,
+        // height: 16,
+        // marginBottom: 6,
+        // marginTop: 8
+      }),
+      h5: css({
+        // borderRadius: 8,
+        // height: 16,
+        // marginBottom: 6,
+        // marginTop: 8
       }),
       h6: css({
         borderRadius: 4,
         height: 8,
         marginBottom: 4,
-        marginTop: 5,
-        width: "60%"
+        marginTop: 5
       }),
-      root: css({
-        background: palette.grey5.hex
+      light: css({
+        color: headingColourLight
       })
     }
   };
@@ -143,6 +169,7 @@ class Heading extends React.PureComponent<IProps> {
       margin = true,
       className,
       skeleton,
+      skeletonWidth,
       variant = "display1",
       ...otherProps
     } = this.props;
@@ -163,10 +190,12 @@ class Heading extends React.PureComponent<IProps> {
       return (
         <div
           className={classnames(
-            classes.skeleton.root,
             classes.skeleton[Tag],
+            classes.skeleton[colour],
+            marginStyles,
             marginStyles
           )}
+          style={{ width: skeletonWidth ? skeletonWidth : "100%" }}
         />
       );
     }
