@@ -5,6 +5,7 @@ import { IBaseTheme, withStyles } from "../../theme";
 
 interface IClasses {
   arrow: string;
+  body: string;
   root: string;
 }
 
@@ -20,22 +21,31 @@ const styles = (theme: IBaseTheme): IClasses => {
 
   return {
     arrow: css({
-      background: palette.grey5.hex,
+      background: palette.white.hex,
+      borderBottom: `1px solid ${palette.grey5.hex}`,
+      borderLeft: `1px solid ${palette.grey5.hex}`,
       height: 10,
       left: -5,
       position: "absolute",
+      top: 12,
       transform: "rotate(45deg)",
-      width: 10
+      width: 10,
+      zIndex: 2
     }),
-    root: css({
+    body: css({
       alignItems: "center",
-      background: palette.grey5.hex,
+      background: palette.white.hex,
+      border: `1px solid ${palette.grey5.hex}`,
       color: textColourDark,
       display: "flex",
       fontWeight: fontWeights.bold,
       height: 32,
       justifyContent: "center",
       padding: "0 10px",
+      position: "relative",
+      zIndex: 1
+    }),
+    root: css({
       position: "relative"
     })
   };
@@ -53,9 +63,11 @@ export class Counter extends React.PureComponent<IProps> {
     const { classes, className, total, ...otherProps } = this.props;
 
     return (
-      <div className={classnames(classes.root, className)} {...otherProps}>
+      <div className={classnames(classes.root, className)}>
         <span className={classes.arrow} />
-        <span>{total}</span>
+        <div className={classes.body} {...otherProps}>
+          <span>{total}</span>
+        </div>
       </div>
     );
   }

@@ -23,10 +23,21 @@ const styles = (theme: IBaseTheme): IClasses => {
   return {
     loader: css({
       position: "absolute",
-      zIndex: 1
+      zIndex: 5
     }),
     root: css({
-      zIndex: 2
+      outline: 0,
+      zIndex: 10,
+      ["&:focus"]: {
+        ["> div > div:nth-child(2)"]: {
+          boxShadow: "0px 30px 75px 0px rgba(0,0,0,0.5)"
+        }
+      },
+      [`&:active`]: {
+        ["> div > div:nth-child(2)"]: {
+          boxShadow: "0px 2px 75px 0px rgba(0,0,0,0.35)"
+        }
+      }
     })
   };
 };

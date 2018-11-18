@@ -16,14 +16,14 @@ interface IState {
  * Component for defering the mounting fo a component until a condition is met
  *
  * @example
- * <DeferredRenderer condition={boolean} once={boolean} render={() => <div />} />
+ * <DeferredRenderer condition={boolean} render={() => <div />} />
  */
 class DeferredRenderer extends React.PureComponent<IProps, IState> {
   public state = {
     shouldRender: false
   };
 
-  public componentDidUpdate() {
+  public checkCondition() {
     const { condition } = this.props;
     const { shouldRender } = this.state;
 
@@ -31,6 +31,14 @@ class DeferredRenderer extends React.PureComponent<IProps, IState> {
     if (!shouldRender && condition) {
       this.setState({ shouldRender: true });
     }
+  }
+
+  public componentDidMount() {
+    this.checkCondition();
+  }
+
+  public componentDidUpdate() {
+    this.checkCondition();
   }
 
   public render() {

@@ -3,7 +3,9 @@ import getUserByUsername from "../../user/getUserByUsername";
 import getUserById from "../../user/getUserById";
 import getPixelsByUsername from "../../pixels/getPixelsByUsername";
 import withAuth from "../helpers/withAuth";
-import updateUserLikedPixels from "../../pixels/updateUserLikedPixels";
+import updateUserLikedPixels from "../../user/updateUserLikedPixels";
+import updateUserFollowing from "../../user/updateUserFollowing";
+import updateUserFollowers from "../../user/updateUserFollowers";
 
 export const userTypeDef = gql`
   type User {
@@ -60,6 +62,38 @@ export const userResolver = {
 
       return {
         likedPixels
+      };
+    },
+
+    updateUserFollowing: async (_, { userId, method }, context) => {
+      const { db } = context;
+      const decodedAuthToken = await withAuth(context.authorization);
+
+      const following = await updateUserFollowing(
+        userId,
+        decodedAuthToken.uid,
+        method,
+        db
+      );
+
+      return {
+        following
+      };
+    },
+
+    updateUserFollowers: async (_, { userId, method }, context) => {
+      const { db } = context;
+      const decodedAuthToken = await withAuth(context.authorization);
+
+      const followers = await updateUserFollowers(
+        userId,
+        decodedAuthToken.uid,
+        method,
+        db
+      );
+
+      return {
+        followers
       };
     }
   }

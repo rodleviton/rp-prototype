@@ -4,11 +4,14 @@ import { IBaseTheme, withStyles } from "@modules/reactive-pixels-ui/theme";
 import { ResponsiveConsumer } from "@modules/reactive-pixels-ui/theme/ResponsiveProvider";
 import { UserComposer } from "@root/composers/UserComposer";
 import withAuth from "@root/hoc/withAuth";
+import withAuthUserProfile, {
+  IGetAuthUserProfileData,
+  IGetAuthUserProfileProps
+} from "@root/hoc/withAuthUserProfile";
 import { css } from "emotion";
 import * as React from "react";
 import { ChildProps, compose } from "react-apollo";
 import { IUserModel } from "reactive-pixels-common/models/UserModel";
-import withUser, { IGetUserData, IGetUserProps } from "./withUser";
 
 interface IClasses {
   sticker: string;
@@ -22,23 +25,31 @@ interface IProps {
 
 const styles = (theme: IBaseTheme): IClasses => {
   const { breakpoints } = theme;
+  const { palette } = theme.colours;
   const { spacers } = theme.sizes;
 
   return {
     sticker: css({
       height: "100%",
+      outline: 0,
       paddingLeft: spacers.medium * 1.5, // 15
       paddingRight: spacers.medium * 1.5,
       [`@media (min-width: ${breakpoints.medium}px)`]: {
         paddingLeft: spacers.medium * 1.5, // 30
         paddingRight: spacers.medium * 1.5
+      },
+      ["&:focus, &:hover"]: {
+        background: palette.grey6.hex
+      },
+      [`&:active`]: {
+        boxShadow: `inset 0px 0px 4px 0px ${palette.grey5.hex}`
       }
     })
   };
 };
 
 class ProfileScene extends React.Component<
-  ChildProps<IGetUserProps & IProps, IGetUserData>
+  ChildProps<IGetAuthUserProfileProps & IProps, IGetAuthUserProfileData>
 > {
   public render() {
     const { classes, data, theme } = this.props;
@@ -79,6 +90,6 @@ class ProfileScene extends React.Component<
 
 export default compose(
   withAuth,
-  withUser,
+  withAuthUserProfile,
   withStyles(styles, { withTheme: true })
 )(ProfileScene);

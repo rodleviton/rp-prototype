@@ -1,3 +1,4 @@
+import { Heading } from "@modules/reactive-pixels-ui/components/Heading";
 import classnames from "classnames";
 import { css } from "emotion";
 import * as React from "react";
@@ -38,7 +39,6 @@ interface IProps {
 const styles = (theme: IBaseTheme): IClasses => {
   const { palette } = theme.colours;
   const { spacers } = theme.sizes;
-  const { fontSizeExtraSmall } = theme.typography;
 
   return {
     alignment: {
@@ -58,8 +58,6 @@ const styles = (theme: IBaseTheme): IClasses => {
       }
     },
     name: css({
-      color: palette.grey1.hex,
-      fontSize: fontSizeExtraSmall,
       textTransform: "uppercase"
     }),
     root: css({
@@ -90,7 +88,7 @@ export class ProfileSticker extends React.PureComponent<IProps> {
       className,
       compact = false,
       align = "left",
-      name = "...",
+      name = "",
       subheading,
       url = "",
       ...otherProps
@@ -113,7 +111,15 @@ export class ProfileSticker extends React.PureComponent<IProps> {
             {subheading && (
               <Box className={classes.subheading}>{subheading}</Box>
             )}
-            <Box className={classes.name}>{name}</Box>
+            <Heading
+              skeleton={true}
+              skeletonWidth="100px"
+              className={classes.name}
+              variant="display6"
+              margin={false}
+            >
+              {name}
+            </Heading>
           </Box>
         )}
       </Link>

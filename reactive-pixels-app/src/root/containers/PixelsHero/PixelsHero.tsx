@@ -30,11 +30,26 @@ interface IProps {
 }
 
 const styles = (theme: IBaseTheme): IClasses => {
+  const { palette } = theme.colours;
   const { spacers } = theme.sizes;
 
   return {
     sticker: css({
-      marginBottom: spacers.medium
+      border: "1px solid transparent",
+      marginBottom: spacers.medium,
+      transition: "background 0.25s",
+      ["&:focus, &:hover"]: {
+        background: "#fff",
+        border: `1px solid ${palette.grey5.hex}`,
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 3,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 3,
+        outline: 0
+      },
+      [`&:active`]: {
+        boxShadow: `inset 0px 0px 4px 0px ${palette.grey5.hex}`
+      }
     })
   };
 };

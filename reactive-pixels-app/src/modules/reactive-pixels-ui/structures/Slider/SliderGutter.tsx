@@ -54,6 +54,7 @@ class SliderGutter extends React.PureComponent<IProps> {
       onClick,
       ...otherProps
     } = this.props;
+
     const buttonVariant = active ? "primary" : "secondary";
 
     return (

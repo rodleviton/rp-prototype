@@ -66,12 +66,10 @@ export const styles = (theme: IBaseTheme): IClasses => {
         display: "flex",
         height: HEIGHT,
         justifyContent: "center",
+        outline: 0,
         paddingLeft: PADDING_HORIZONTAL_BASE,
         paddingRight: PADDING_HORIZONTAL_BASE,
-        position: "relative",
-        [`&:focus`]: {
-          boxShadow: "inset 0px 0px 4px 0px rgba(0,0,0,0.20)"
-        }
+        position: "relative"
       })
     },
     icon: {
@@ -100,7 +98,18 @@ export const styles = (theme: IBaseTheme): IClasses => {
         root: css({
           borderColor: palette.primary.hex,
           borderStyle: "solid",
-          borderWidth: 1
+          borderWidth: 1,
+          ["&:focus"]: {
+            borderColor: new TinyColor(palette.primary.hex)
+              .darken(10)
+              .toString(),
+            boxShadow: `0 0 5px ${palette.grey5.hex}`
+          },
+          [`&:active`]: {
+            boxShadow: `0 0 5px ${palette.grey5.hex}, inset 0px 0px 4px 0px ${
+              palette.grey4.hex
+            }`
+          }
         })
       },
       primary: {
@@ -110,7 +119,18 @@ export const styles = (theme: IBaseTheme): IClasses => {
         root: css({
           backgroundColor: palette.primary.hex,
           borderColor: new TinyColor(palette.primary.hex).darken(5).toString(),
-          borderStyle: "solid"
+          borderStyle: "solid",
+          ["&:focus"]: {
+            borderColor: new TinyColor(palette.primary.hex)
+              .darken(10)
+              .toString(),
+            boxShadow: `0 0 5px ${palette.primary.hex}`
+          },
+          [`&:active`]: {
+            boxShadow: `0 0 5px ${palette.primary.hex}, inset 0px 0px 4px 0px ${
+              palette.grey4.hex
+            }`
+          }
         })
       },
       secondary: {
@@ -120,7 +140,16 @@ export const styles = (theme: IBaseTheme): IClasses => {
         root: css({
           borderColor: palette.grey5.hex,
           borderStyle: "solid",
-          borderWidth: 1
+          borderWidth: 1,
+          ["&:focus"]: {
+            borderColor: palette.grey4.hex,
+            boxShadow: `0 0 5px ${palette.grey5.hex}`
+          },
+          [`&:active`]: {
+            boxShadow: `0 0 5px ${palette.grey5.hex}, inset 0px 0px 4px 0px ${
+              palette.grey4.hex
+            }`
+          }
         })
       }
     }

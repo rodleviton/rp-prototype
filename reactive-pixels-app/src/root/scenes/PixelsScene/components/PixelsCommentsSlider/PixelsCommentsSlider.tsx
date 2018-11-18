@@ -79,7 +79,10 @@ class PixelsCommentsSlider extends React.PureComponent<IProps> {
           active={active}
           onClick={onToggle}
         >
-          <Icon.Comment className={classes.icon} colour="light" />
+          <Icon.Comment
+            className={classes.icon}
+            colour={active ? "light" : "dark"}
+          />
         </SliderGutter>
       </SliderPanel>
     );

@@ -16,7 +16,7 @@ interface IPixelsData extends IPixelsModel {
 }
 
 interface IProps {
-  loggedInUserId: string;
+  loggedInUserId?: string;
   pixels: IPixelsModel;
   render: (data: IPixelsData) => React.ReactNode;
 }

@@ -64,7 +64,7 @@ export class AuthorCard extends React.PureComponent<IProps> {
       avatar = "",
       classes,
       className,
-      name = "...",
+      name = "",
       url = "",
       ...otherProps
     } = this.props;

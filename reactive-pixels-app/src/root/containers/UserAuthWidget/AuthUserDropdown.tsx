@@ -12,11 +12,19 @@ const customSelectStyles = {
     borderLeft: `1px solid #E6E6E6`,
     borderRadius: 0,
     borderRight: `1px solid #E6E6E6`,
+    cursor: "pointer",
     display: "flex",
     height: "100%",
     justifyContent: "center",
     outline: 0,
-    position: "relative" as "relative"
+    position: "relative" as "relative",
+    transition: "background 0.25s",
+    ["&:focus, &:hover"]: {
+      background: "#F7F7F7"
+    },
+    [`&:active`]: {
+      boxShadow: `inset 0px 0px 4px 0px #E6E6E6`
+    }
   }),
   control: () => ({
     alignItems: "center",
@@ -55,7 +63,6 @@ const customSelectStyles = {
 } as any;
 
 const DropdownIndicator = (props: IndicatorProps<any>) => {
-  console.log(components);
   return (
     components.DropdownIndicator && (
       <components.DropdownIndicator {...props}>

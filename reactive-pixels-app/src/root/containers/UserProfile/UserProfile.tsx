@@ -22,7 +22,7 @@ import * as React from "react";
 import { ChildProps, compose } from "react-apollo";
 import { IPixelsModel } from "reactive-pixels-common/models/PixelsModel";
 import { IUserModel } from "reactive-pixels-common/models/UserModel";
-import { FollowUserButton } from "../FollowUserButton";
+import { UserFollowButton } from "../UserFollowButton";
 
 interface IClasses {
   grid: string;
@@ -75,7 +75,7 @@ class UserProfile extends React.Component<
   };
 
   public render() {
-    const { classes, data } = this.props;
+    const { auth, classes, data, username } = this.props;
 
     // We cast empty data to expected type and let
     // component look after pending state
@@ -90,6 +90,7 @@ class UserProfile extends React.Component<
     return (
       <React.Fragment>
         <UserComposer
+          loggedInUserId={auth.user.id}
           user={user}
           render={userData => (
             <React.Fragment>
@@ -99,7 +100,14 @@ class UserProfile extends React.Component<
                   displayName={userData.displayName}
                   location={userData.location}
                 >
-                  <FollowUserButton />
+                  {userData.username !== username && (
+                    <UserFollowButton
+                      isFollowedByLoggedInUser={
+                        userData.isFollowedByLoggedInUser
+                      }
+                      userId={userData.id}
+                    />
+                  )}
                   <ProfileStats
                     numberOfFollowers={userData.numberOfFollowers}
                     numberOfFollowing={userData.numberOfFollowing}

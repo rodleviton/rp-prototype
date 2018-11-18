@@ -7,9 +7,10 @@ import {
 
 interface IUserData extends IUserModel {
   avatarUrl: string;
-  url: string;
+  isFollowedByLoggedInUser: boolean;
   numberOfFollowers: number;
   numberOfFollowing: number;
+  url: string;
 }
 
 interface IUserExtendedData extends IUserExtendedModel {
@@ -18,6 +19,7 @@ interface IUserExtendedData extends IUserExtendedModel {
 }
 
 interface IProps {
+  loggedInUserId?: string;
   user: IUserModel | IUserExtendedModel;
   render: (data: IUserData) => React.ReactNode;
 }
@@ -32,11 +34,18 @@ interface IProps {
  * <UserComposer user={user} />
  */
 class UserComposer extends React.PureComponent<IProps> {
+  public isFollowedByLoggedInUser = () => {
+    const { loggedInUserId = "", user } = this.props;
+
+    return user.followers.includes(loggedInUserId);
+  };
+
   public render() {
     const { render, user } = this.props;
 
     if (!user || !user.id) {
       return render({
+        isFollowedByLoggedInUser: false,
         numberOfFollowers: 0,
         numberOfFollowing: 0
       } as IUserData);
@@ -44,6 +53,7 @@ class UserComposer extends React.PureComponent<IProps> {
 
     const userData: IUserData | IUserExtendedData = {
       avatarUrl: `https://github.com/${user.username}.png`,
+      isFollowedByLoggedInUser: this.isFollowedByLoggedInUser(),
       numberOfFollowers: user.followers.length,
       numberOfFollowing: user.following.length,
       url: `/${user.username}`,

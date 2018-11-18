@@ -77,7 +77,7 @@ class PixelsMetadataSlider extends React.PureComponent<IProps> {
           active={active}
           onClick={onToggle}
         >
-          <Icon.Code colour="light" />
+          <Icon.Code colour={active ? "light" : "dark"} />
         </SliderGutter>
       </SliderPanel>
     );

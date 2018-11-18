@@ -41,11 +41,12 @@ const styles = (theme: IBaseTheme): IClasses => {
     shadow: css({
       background: "transparent",
       bottom: 0,
-      boxShadow: "0px 17px 173px 0px rgba(0,0,0,0.5)",
+      boxShadow: "0px 15px 75px 0px rgba(0,0,0,0.35)",
       height: 100,
       left: "50%",
       position: "absolute",
       transform: "translate(-50%, 0)",
+      transition: "all 0.25s",
       width: 300,
       zIndex: 1
     })

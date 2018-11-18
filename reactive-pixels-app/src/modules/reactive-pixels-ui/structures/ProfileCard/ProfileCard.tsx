@@ -83,7 +83,6 @@ export class ProfileCard extends React.PureComponent<IProps> {
             url={avatarUrl}
             size="large"
             variant="dark"
-            skeleton={true}
           />
           <Chip label="PRO" />
         </div>

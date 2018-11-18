@@ -3,10 +3,10 @@ import { showNotification } from "@modules/notifications/daos/notificationAction
 import { Button } from "@modules/reactive-pixels-ui/components/Button";
 import { IBaseTheme, withStyles } from "@modules/reactive-pixels-ui/theme";
 import withAuth from "@root/hoc/withAuth";
-import withLikePixelsHandler, {
-  IPixelsLikeInputProps,
-  IPixelsLikeVariables
-} from "@root/hoc/withLikePixelsHandler";
+import withUserFollowHandler, {
+  IUserFollowInputProps
+  // IUserFollowVariables
+} from "@root/hoc/withUserFollowHandler";
 import { css } from "emotion";
 import * as React from "react";
 import { compose } from "react-apollo";
@@ -21,13 +21,9 @@ interface IProps {
   classes: IClasses;
   className?: string;
   dispatch: Dispatch<AnyAction>;
-  isLikedByLoggedInUser: boolean;
-  likes: string[];
-  userLikedPixels: string[];
-  onUpdatePixelsLikesVariables: IPixelsLikeVariables;
-  onPixelsLike: (
-    { auth, id, likes, method, userLikedPixels }: IPixelsLikeInputProps
-  ) => void;
+  isFollowedByLoggedInUser: boolean;
+  onUserFollow: ({ auth, userId, method }: IUserFollowInputProps) => void;
+  userId: string;
 }
 
 const styles = (theme: IBaseTheme): IClasses => {
@@ -42,44 +38,41 @@ const styles = (theme: IBaseTheme): IClasses => {
 };
 
 /**
- * FollowUserButton
+ * UserFollowButton
  *
  * @param {string} [className=""] - Extend css classes to override default styling.
  * @example
- * <FollowUserButton />
+ * <UserFollowButton />
  */
-export class FollowUserButton extends React.PureComponent<IProps> {
-  public onPixelsLike = () => {
+export class UserFollowButton extends React.PureComponent<IProps> {
+  public onUserFollow = () => {
     const {
       auth,
       dispatch,
-      likes = [],
-      onPixelsLike,
-      onUpdatePixelsLikesVariables,
-      userLikedPixels
+      isFollowedByLoggedInUser,
+      onUserFollow,
+      userId
     } = this.props;
 
     if (!auth.user.id) {
       dispatch(showNotification("NOT_AUTHORISED"));
-
       return;
     }
 
-    onPixelsLike({
+    onUserFollow({
       auth,
-      id: onUpdatePixelsLikesVariables.id,
-      likes,
-      method: onUpdatePixelsLikesVariables.method,
-      userLikedPixels
+      method: isFollowedByLoggedInUser ? "remove" : "add",
+      userId
     });
   };
+
   public render() {
-    // const { classes, isLikedByLoggedInUser, likes = [] } = this.props;
-    // const pushButtonState = isLikedByLoggedInUser ? "primary" : "secondary";
+    const { isFollowedByLoggedInUser } = this.props;
+    const buttonState = isFollowedByLoggedInUser ? "primary" : "secondary";
 
     return (
-      <Button onClick={this.onPixelsLike} variant="default">
-        Follow
+      <Button onClick={this.onUserFollow} variant={buttonState}>
+        {isFollowedByLoggedInUser ? "Following" : "Follow"}
       </Button>
     );
   }
@@ -87,6 +80,6 @@ export class FollowUserButton extends React.PureComponent<IProps> {
 
 export default compose(
   withAuth,
-  withLikePixelsHandler,
+  withUserFollowHandler,
   withStyles(styles)
-)(FollowUserButton);
+)(UserFollowButton);

@@ -1,9 +1,30 @@
+import { IBaseTheme, withStyles } from "@modules/reactive-pixels-ui/theme";
+import { css } from "emotion";
 import * as React from "react";
 
-class PixelsMeta extends React.PureComponent<{}> {
+interface IClasses {
+  root: string;
+}
+
+interface IProps {
+  classes: IClasses;
+}
+
+const styles = (theme: IBaseTheme): IClasses => {
+  return {
+    root: css({
+      background: "#000",
+      width: "100%"
+    })
+  };
+};
+
+class PixelsMeta extends React.PureComponent<IProps> {
   public render() {
-    return <div>Pixels Meta</div>;
+    const { classes } = this.props;
+
+    return <div className={classes.root}>Pixels Meta</div>;
   }
 }
 
-export default PixelsMeta;
+export default withStyles(styles)(PixelsMeta);

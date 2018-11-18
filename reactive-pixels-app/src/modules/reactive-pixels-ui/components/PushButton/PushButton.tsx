@@ -31,7 +31,7 @@ interface IProps {
 }
 
 export const styles = (theme: IBaseTheme): IClasses => {
-  const { borderColour, palette } = theme.colours;
+  const { palette } = theme.colours;
   const BUTTON_SIZE = 40;
 
   return {
@@ -52,12 +52,8 @@ export const styles = (theme: IBaseTheme): IClasses => {
         display: "flex",
         height: BUTTON_SIZE,
         justifyContent: "center",
+        outline: 0,
         width: BUTTON_SIZE,
-
-        [`&:focus`]: {
-          boxShadow: "inset 0px 0px 4px 0px rgba(0,0,0,0.20)",
-          outline: 0
-        },
 
         ["> svg"]: {
           transform: `scale(1.2)`
@@ -68,19 +64,52 @@ export const styles = (theme: IBaseTheme): IClasses => {
       default: {
         root: css({
           backgroundColor: palette.white.hex,
-          borderColor: borderColour
+          borderColor: palette.primary.hex,
+          borderStyle: "solid",
+          ["&:focus"]: {
+            borderColor: new TinyColor(palette.primary.hex)
+              .darken(10)
+              .toString(),
+            boxShadow: `0 0 5px ${palette.grey5.hex}`
+          },
+          [`&:active`]: {
+            boxShadow: `0 0 5px ${palette.grey5.hex}, inset 0px 0px 4px 0px ${
+              palette.grey4.hex
+            }`
+          }
         })
       },
       primary: {
         root: css({
           backgroundColor: palette.primary.hex,
-          borderColor: new TinyColor(palette.primary.hex).darken(5).toString()
+          borderColor: new TinyColor(palette.primary.hex).darken(5).toString(),
+          ["&:focus"]: {
+            borderColor: new TinyColor(palette.primary.hex)
+              .darken(10)
+              .toString(),
+            boxShadow: `0 0 5px ${palette.primary.hex}`
+          },
+          [`&:active`]: {
+            boxShadow: `0 0 5px ${palette.primary.hex}, inset 0px 0px 4px 0px ${
+              palette.grey4.hex
+            }`
+          }
         })
       },
       secondary: {
         root: css({
-          backgroundColor: palette.grey3.hex,
-          borderColor: new TinyColor(palette.grey3.hex).darken(5).toString()
+          borderColor: palette.grey5.hex,
+          borderStyle: "solid",
+          borderWidth: 1,
+          ["&:focus"]: {
+            borderColor: palette.grey4.hex,
+            boxShadow: `0 0 5px ${palette.grey5.hex}`
+          },
+          [`&:active`]: {
+            boxShadow: `0 0 5px ${palette.grey5.hex}, inset 0px 0px 4px 0px ${
+              palette.grey4.hex
+            }`
+          }
         })
       }
     }

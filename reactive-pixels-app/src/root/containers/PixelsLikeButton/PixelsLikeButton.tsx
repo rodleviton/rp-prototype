@@ -82,11 +82,12 @@ export class PixelsLikeButton extends React.PureComponent<IProps> {
   public render() {
     const { classes, isLikedByLoggedInUser, likes = [] } = this.props;
     const pushButtonState = isLikedByLoggedInUser ? "primary" : "secondary";
+    const iconColour = isLikedByLoggedInUser ? "light" : "dark";
 
     return (
       <footer className={classes.root}>
         <PushButton onClick={this.onPixelsLike} variant={pushButtonState}>
-          <Icon.Heart colour="light" />
+          <Icon.Heart colour={iconColour} />
         </PushButton>
         <Counter className={classes.counter} total={likes.length || 0} />
       </footer>

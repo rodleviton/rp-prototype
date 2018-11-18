@@ -9,11 +9,30 @@ export const mutationTypeDef = gql`
     likedPixels: [String]!
   }
 
+  type UpdateUserFollowersResponse {
+    followers: [String]!
+  }
+
+  type UpdateUserFollowingResponse {
+    following: [String]!
+  }
+
   type Mutation {
     updatePixelsLikes(id: ID!, method: String!): UpdatePixelsLikesResponse
+
     updateUserLikedPixels(
       id: ID!
       method: String!
     ): UpdateUserLikedPixelsResponse
+
+    updateUserFollowers(
+      userId: ID!
+      method: String!
+    ): UpdateUserFollowersResponse
+
+    updateUserFollowing(
+      userId: ID!
+      method: String!
+    ): UpdateUserFollowingResponse
   }
 `;
